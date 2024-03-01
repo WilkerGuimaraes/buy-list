@@ -61,3 +61,15 @@ export const ListContent = styled.div`
     text-transform: capitalize;
   }
 `;
+
+export const TrashButton = styled.button`
+  border: none;
+  background: none;
+  padding: 3px;
+  cursor: pointer;
+
+  .icon {
+    font-size: 20px;
+    color: #ff7300;
+  }
+`;
