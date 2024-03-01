@@ -1,5 +1,11 @@
+import { Container } from "./App.style";
+
 function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <Container>
+      <h1>Buy List</h1>
+    </Container>
+  );
 }
 
 export default App;
