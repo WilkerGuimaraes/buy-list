@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { AddButton, AddInput, Container } from "./App.style";
+import { AddButton, AddInput, Container, ListContent } from "./App.style";
 
 function App() {
   const inputRef = useRef();
@@ -34,7 +34,9 @@ function App() {
       <AddButton onClick={handleAddProduct}>Add</AddButton>
 
       {products.map((product) => (
-        <p>{product.name}</p>
+        <ListContent key={product.id}>
+          <p>{product.name}</p>
+        </ListContent>
       ))}
     </Container>
   );

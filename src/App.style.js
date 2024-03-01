@@ -43,3 +43,21 @@ export const AddButton = styled.button`
     color: #ff7300;
   }
 `;
+
+export const ListContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222;
+    text-transform: capitalize;
+  }
+`;
