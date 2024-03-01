@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { AddButton, AddInput, Container } from "./App.style";
 
@@ -19,7 +20,7 @@ function App() {
     setProducts([
       ...products,
       {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         name: inputRef.current.value,
       },
     ]);
