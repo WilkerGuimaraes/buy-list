@@ -4,6 +4,7 @@ export const Container = styled.div`
   min-height: 50vh;
   padding: 20px;
   background-color: #4070f4;
+  border-radius: 10px;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1), 0 25px 45px rgba(0, 0, 0, 0.1);
 
   h1 {

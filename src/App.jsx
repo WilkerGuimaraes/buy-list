@@ -42,10 +42,21 @@ function App() {
     setProducts(removedProduct);
   };
 
+  const handleKeyboardEvent = (event) => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      handleAddProduct();
+    }
+  };
+
   return (
     <Container>
       <h1>Buy List</h1>
-      <AddInput type="text" placeholder="product..." ref={inputRef} />
+      <AddInput
+        type="text"
+        placeholder="product..."
+        ref={inputRef}
+        onKeyDown={handleKeyboardEvent}
+      />
       <AddButton onClick={handleAddProduct}>Add</AddButton>
 
       {products.map((product) => (
