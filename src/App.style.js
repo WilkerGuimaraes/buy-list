@@ -36,10 +36,10 @@ export const AddButton = styled.button`
   border-radius: 5px;
   background-color: #ff7300;
   color: #f7f7f7;
-  cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
+    cursor: pointer;
     background-color: #f7f7f7;
     color: #ff7300;
   }
@@ -64,12 +64,12 @@ export const ListContent = styled.div`
 `;
 
 export const TrashButton = styled.button`
+  background: transparent;
   border: none;
-  background: none;
   padding: 3px;
-  cursor: pointer;
 
   .icon {
+    cursor: pointer;
     font-size: 20px;
     color: #ff7300;
   }
