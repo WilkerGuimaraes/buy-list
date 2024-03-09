@@ -12,16 +12,7 @@ import {
 
 function App() {
   const inputRef = useRef();
-  const [products, setProducts] = useState([
-    {
-      id: "1",
-      name: "Milk",
-    },
-    {
-      id: "2",
-      name: "noodle",
-    },
-  ]);
+  const [products, setProducts] = useState([]);
 
   const handleAddProduct = () => {
     setProducts([
