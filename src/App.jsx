@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
 import axios from "axios";
 
@@ -11,7 +11,6 @@ import {
 } from "./App.style";
 
 function App() {
-  const inputRef = useRef();
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
 
@@ -46,6 +45,16 @@ function App() {
     }
   };
 
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:3335/productsList/${productId}`);
+
+      await fetchProducts();
+    } catch (_error) {
+      console.log("Algo deu errado!");
+    }
+  };
+
   const handleKeyboardEvent = (event) => {
     if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
       handleAddProduct();
@@ -58,7 +67,6 @@ function App() {
       <AddInput
         type="text"
         placeholder="produto..."
-        ref={inputRef}
         value={productName}
         onChange={onChange}
         onKeyDown={handleKeyboardEvent}
@@ -68,7 +76,7 @@ function App() {
       {products.map((product) => (
         <ListContent key={product._id}>
           <p>{product.productName}</p>
-          <TrashButton>
+          <TrashButton onClick={() => handleDeleteProduct(product._id)}>
             <IoTrashOutline className="icon" />
           </TrashButton>
         </ListContent>
