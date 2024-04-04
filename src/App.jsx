@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useRef, useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
+import axios from "axios";
 
 import {
   AddButton,
@@ -13,24 +13,37 @@ import {
 function App() {
   const inputRef = useRef();
   const [products, setProducts] = useState([]);
+  const [productName, setProductName] = useState("");
 
-  const handleAddProduct = () => {
-    setProducts([
-      ...products,
-      {
-        id: uuidv4(),
-        name: inputRef.current.value,
-      },
-    ]);
-    inputRef.current.value = "";
+  const onChange = (e) => {
+    setProductName(e.target.value);
   };
 
-  const handleDeleteProduct = (productId) => {
-    const removedProduct = products.filter(
-      (product) => productId !== product.id
-    );
+  const fetchProducts = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:3335/productsList");
+      setProducts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    setProducts(removedProduct);
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const handleAddProduct = async () => {
+    try {
+      await axios.post("http://localhost:3335/productsList", {
+        productName,
+      });
+
+      await fetchProducts();
+
+      setProductName("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleKeyboardEvent = (event) => {
@@ -41,19 +54,21 @@ function App() {
 
   return (
     <Container>
-      <h1>Buy List</h1>
+      <h1>Lista de compras</h1>
       <AddInput
         type="text"
-        placeholder="product..."
+        placeholder="produto..."
         ref={inputRef}
+        value={productName}
+        onChange={onChange}
         onKeyDown={handleKeyboardEvent}
       />
-      <AddButton onClick={handleAddProduct}>Add</AddButton>
+      <AddButton onClick={handleAddProduct}>Adicionar</AddButton>
 
       {products.map((product) => (
-        <ListContent key={product.id}>
-          <p>{product.name}</p>
-          <TrashButton onClick={() => handleDeleteProduct(product.id)}>
+        <ListContent key={product._id}>
+          <p>{product.productName}</p>
+          <TrashButton>
             <IoTrashOutline className="icon" />
           </TrashButton>
         </ListContent>
